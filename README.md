@@ -10,20 +10,20 @@ main
 ㄴ  scpark (박성철 부장
 ### 3. Git 명령어
 #### 3-1. Git 원격 저장소 연결
-1. Git이 설치 되어 있는지 확인
+1. Git이 설치 되어 있는지 확인  
 'git --version' 
-2. Git 초기화
+2. Git 초기화  
 'git init'
-3. 원격 저장소 연결
+3. 원격 저장소 연결  
 'git remote add origin "URL"'
-4. 새로운 branch 생성 및 전환 
+4. 새로운 branch 생성 및 전환  
 'git checkout -b "branch 명칭"'
-5. 브랜치 상태 확인
+5. 브랜치 상태 확인  
 'git branch'
 #### 3-2. 수정 후, branch에 적용하는 방식(Local -> My Branch)
-1. 코드를 수정한 뒤 변경 사항 스테이징 (변경된 파일 모두)
+1. 코드를 수정한 뒤 변경 사항 스테이징 (변경된 파일 모두)  
 'git add . ''
-2. 변경 사항을 커밋 
+2. 변경 사항을 커밋  
 'git commit -m "메시지"'
-3. 원격 Branch에 푸쉬
+3. 원격 Branch에 푸쉬  
 'git push -u origin bjpark'
