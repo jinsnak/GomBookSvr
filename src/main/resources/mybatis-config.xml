@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!--camelCase를 만들기위한 설정-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--select 결과에 대해서 column이나 row의 null을 허용-->
+        <setting name="callSettersOnNulls" value="true"/>
+        <!--쿼리에 매핑되는 파라미터에 null이 있어도 허용함-->
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+
+<!--    camelMap부분. - 기본설정에서는 typeAliases 부분은 기재하지않는다. 차후 guava를 추가하면서 사용하게됨.-->
+<!--    <typeAliases>-->
+<!--        <typeAlias type="com.dhflour.restsvr.utils.MapToCamelUtil" alias="cMap"/>-->
+<!--    </typeAliases>-->
+</configuration>

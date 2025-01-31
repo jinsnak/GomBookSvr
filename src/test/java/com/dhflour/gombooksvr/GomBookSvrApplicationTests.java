@@ -1,4 +1,4 @@
-package com.example.gombooksvr;
+package com.dhflour.gombooksvr;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

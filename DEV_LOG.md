@@ -15,8 +15,20 @@
 | GomBookSvr | 프로젝트 생성 및 초기화      | Spring Boot 환경설정 매뉴얼을 바탕으로 Spring Boot 프로젝트를 생성함. |
 
 ### 2. 기능 추가 및 수정
-| 파일명          | 변경 내용                             | 사유                                                    |
-|--------------|-----------------------------------|-------------------------------------------------------|
-| build.gradle | Dependencies 부분에 mariadb 라이브러리 추가 | mariadb 사용을 위해 라이브러리를 추가함.                            |
-| build.gradle | Dependencies 부분에 mybatis 라이브러리 추가 | 데이터맵핑 라이브러리로써 SQL쿼리를 XML파일이나 애노테이션에 명시적으로 작성하도록 지원한다. |
+| 파일명                        | 변경 내용                               | 사유                                                 |
+|----------------------------|-------------------------------------|----------------------------------------------------|
+| build.gradle               | Dependencies 부분에 mariaDB 라이브러리 추가   | mariaDB 사용을 위해 라이브러리를 추가                           |
+| build.gradle               | Dependencies 부분에 mybatis 라이브러리 추가   | 데이터맵핑 라이브러리로써 SQL쿼리를 XML파일이나 애노테이션에 명시적으로 작성하도록 지원 |
+| application.properties     | mariaDB 관련 Connection 설정 추가         | mariaDB의 커넥션 정보를 프로퍼티에 저장                          |
+| mybatis-config.xml         | mybatis 기본설정 추가                     | resources폴더에 mybatis 관련 config 파일 생성               |
+| config 패키지                 | config 패키지를 gombooksvr 패키지 폴더 아래 생성 | config 폴더를 생성하여 프로젝트에 필요한 config 파일을 관리            |
+| MariaDataSourceConfig.java | mariadb의 config 파일을 생성 및 설정         | mariadb와 관련된 config 파일을 생성하여 기초 설정값을 세팅            |
 
+
+### 99. 작성 중 확인한 개념
+1. **@Primary 어노테이션의 쓰임**
+
+    Spring에서 동일한 타입의 빈(Bean)이 여러 개 존재할 때,
+    기본으로 선택할 빈을 지정하는 어노테이션
+
+2. 
