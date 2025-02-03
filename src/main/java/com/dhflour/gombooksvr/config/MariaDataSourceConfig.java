@@ -27,8 +27,7 @@ public class MariaDataSourceConfig {
     // 2개의 데이터베이스 연결이 존재하기 때문에 MariaDB를 기본(Primary) 데이터베이스로 지정
     @Primary
     @Bean(name = "mariaDatasource")
-    // application.properties 또는 application.yml에서 "spring.datasource.maria"로 시작하는 속성을 읽어와 DataSource 객체를 생성
-    @ConfigurationProperties(prefix = "spring.datasource.maria")
+    @ConfigurationProperties(prefix = "spring.datasource.maria") // application.properties 또는 application.yml에서 "spring.datasource.maria"로 시작하는 속성을 읽어와 DataSource 객체를 생성
     public DataSource mariaDataSource() {
         return DataSourceBuilder.create().build();  // DataSource 객체를 생성 및 반환
     }
@@ -40,9 +39,9 @@ public class MariaDataSourceConfig {
         SqlSessionFactoryBean mariaSqlSessionFactory = new SqlSessionFactoryBean();
         mariaSqlSessionFactory.setDataSource(dataSource);   // 위에서 생성한 mariaDataSource를 설정
         // MyBatis의 전체적인 설정을 담은 설정 파일(mybatis-config.xml)의 위치를 지정
-        mariaSqlSessionFactory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:mybatis/mybatis-config.xml"));
+        mariaSqlSessionFactory.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("mybatis-config.xml"));
         // SQL 쿼리를 포함하는 Mapper XML 파일의 위치를 지정 (MariaDB 관련 Mapper만 로드)
-        mariaSqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/maria/**/*.xml"));
+        mariaSqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:static/mapper/maria/**/*.xml"));
         return mariaSqlSessionFactory.getObject();
     }
 

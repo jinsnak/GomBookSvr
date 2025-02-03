@@ -21,14 +21,17 @@
 | build.gradle               | Dependencies 부분에 mybatis 라이브러리 추가   | 데이터맵핑 라이브러리로써 SQL쿼리를 XML파일이나 애노테이션에 명시적으로 작성하도록 지원 |
 | application.properties     | mariaDB 관련 Connection 설정 추가         | mariaDB의 커넥션 정보를 프로퍼티에 저장                          |
 | mybatis-config.xml         | mybatis 기본설정 추가                     | resources폴더에 mybatis 관련 config 파일 생성               |
-| config 패키지                 | config 패키지를 gombooksvr 패키지 폴더 아래 생성 | config 폴더를 생성하여 프로젝트에 필요한 config 파일을 관리            |
+| config 패키지                 | config 패키지를 gombooksvr 패키지 폴더 아래 생성 | config 패키지를 생성하여 프로젝트에 필요한 config 파일을 관리           |
 | MariaDataSourceConfig.java | mariadb의 config 파일을 생성 및 설정         | mariadb와 관련된 config 파일을 생성하여 기초 설정값을 세팅            |
+| mapper.maria&oracle 패키지    | mapper.java 파일이 들어갈 패키지를 DB별로 생성    | mapper 패키지를 생성하여 mapper.java 파일들을 DB별로 관리          |
+| resource/static/mapper 폴더  | mapper.xml 파일이 들어갈 패키지를 DB별로 생성     | mapper 폴더를 생성하여 mapper.xml 파일들을 DB별로 관리            |
 
+### 3. Back-end Source 구조
 
-### 99. 작성 중 확인한 개념
+### 99. 개념정리(중간중간 추가)
 1. **@Primary 어노테이션의 쓰임**
 
-    Spring에서 동일한 타입의 빈(Bean)이 여러 개 존재할 때,
+    Spring에서 동일한 타입의 빈(Bean)이 여러 개 존재할 때,  
     기본으로 선택할 빈을 지정하는 어노테이션
 
 2. 

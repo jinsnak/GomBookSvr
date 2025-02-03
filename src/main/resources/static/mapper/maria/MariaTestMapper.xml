@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- mapper DTD 선언 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- SQL Mapping -->
+
+<mapper namespace="com.dhflour.gombooksvr.mapper.maria.MariaTestMapper">
+
+    <select id="getCategoryList" resultType="cMap" parameterType="map">
+        SELECT
+        CATE_ID
+        , CLASS_L
+        , CLASS_S
+        , CATE_NAME
+        , DISP_SEQ
+        , CREATE_DT
+        FROM
+        TB_PROD_CATEGORY
+        WHERE
+        USE_YN = 'Y'
+        <choose>
+            <when test='flag != null and flag.equals("L")'>
+                AND CLASS_S = '000'
+                ORDER BY CLASS_L
+            </when>
+            <when test='flag != null and flag.equals("S")'>
+                AND CLASS_L = #{classL}
+                AND CLASS_S != '000'
+                ORDER BY CLASS_S , DISP_SEQ
+            </when>
+            <otherwise>
+                AND CLASS_S != '000'
+                ORDER BY CLASS_L , DISP_SEQ
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

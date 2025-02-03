@@ -27,3 +27,5 @@ main
 'git commit -m "메시지"'
 3. 원격 Branch에 푸쉬  
 'git push -u origin bjpark'
+
+## 2) Back-end Source 구성

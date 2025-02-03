@@ -13,7 +13,7 @@
     </settings>
 
 <!--    camelMap부분. - 기본설정에서는 typeAliases 부분은 기재하지않는다. 차후 guava를 추가하면서 사용하게됨.-->
-<!--    <typeAliases>-->
-<!--        <typeAlias type="com.dhflour.restsvr.utils.MapToCamelUtil" alias="cMap"/>-->
-<!--    </typeAliases>-->
+    <typeAliases>
+        <typeAlias type="com.dhflour.restsvr.utils.MapToCamelUtil" alias="cMap"/>
+    </typeAliases>
 </configuration>
