@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- mapper DTD 선언 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- SQL Mapping -->
+<mapper namespace="com.dhflour.gombooksvr.mapper.oracle.OracleUserMapper">
+
+    <select id="getEmpList" resultType="map">
+        SELECT A.CD_COMPANY AS CD_COMPANY
+        ,A.NO_EMP
+        ,A.NM_KOR
+        ,A.CD_DEPT
+        ,B.NM_DEPT
+        ,A.NO_TEL_EMER
+        ,A.DT_BIRTH
+        FROM MA_EMP A, MA_DEPT B
+        WHERE A.CD_COMPANY = B.CD_COMPANY
+        AND A.CD_DEPT = B.CD_DEPT
+        AND A.CD_COMPANY = '10'
+        AND A.CD_INCOM != '099'
+        ORDER BY A.CD_DEPT
+    </select>
+
+
+</mapper>
