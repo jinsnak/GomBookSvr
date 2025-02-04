@@ -25,21 +25,37 @@ public class TestController {
     @Autowired
     TestService testService;
 
+//    @Operation(summary = "mariaDB 테스트", description = "카테고리 리스트 불러오기", tags = {"Test Controller"})
+//    @RequestMapping(value = "/getCategoryList", method = RequestMethod.GET)
+//    public ResponseEntity<ResultVO> getCategoryList(@RequestParam Map<String, Object> paramMap) {
+//        ResultVO rvo = new ResultVO();
+//
+//        try{
+//            rvo.setCode(HttpStatus.OK.value());
+//            rvo.setBody(testService.getCategoryList(paramMap));
+//        }
+//        catch(Exception e){
+//            rvo.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+//        }
+//
+//        return new ResponseEntity<>(rvo, HttpStatus.OK);
+//
+//    }
+
     @Operation(summary = "mariaDB 테스트", description = "카테고리 리스트 불러오기", tags = {"Test Controller"})
     @RequestMapping(value = "/getCategoryList", method = RequestMethod.GET)
-    public ResponseEntity<ResultVO> getCategoryList(@RequestParam Map<String, Object> paramMap) {
-        ResultVO rvo = new ResultVO();
+    public ResponseEntity<ResultVO> getCategoryList() {
+        ResultVO resultVO = new ResultVO();
 
         try{
-            rvo.setCode(HttpStatus.OK.value());
-            rvo.setBody(testService.getCategoryList(paramMap));
+            resultVO.setCode(HttpStatus.OK.value());
+            resultVO.setBody(testService.getCategoryList("1"));
         }
-        catch(Exception e){
-            rvo.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        catch (Exception e){
+            resultVO.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
 
-        return new ResponseEntity<>(rvo, HttpStatus.OK);
-
+        return new ResponseEntity<>(resultVO, HttpStatus.OK);
     }
 
 }

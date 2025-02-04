@@ -16,12 +16,31 @@ public class TestService {
         this.mariaTestMapper = mariaTestMapper;
     }
 
-    public Map<String, Object> getCategoryList(Map<String, Object> paramMap){
-        Map<String, Object> returnMap = new HashMap<String, Object>();
+//    public Map<String, Object> getCategoryList(Map<String, Object> paramMap){
+//        Map<String, Object> returnMap = new HashMap<String, Object>();
+//
+//        returnMap = mariaTestMapper.getCategoryList(paramMap);
+//
+//        return returnMap;
+//    }
 
-        returnMap = mariaTestMapper.getCategoryList(paramMap);
+    public Object getCategoryList(String flag){
+        Object returnObj;
 
-        return returnMap;
+        List<Map<String, Object>> categoryList = new ArrayList<Map<String, Object>>();
+        categoryList = mariaTestMapper.getCategoryList();
+
+        if("CNT".equals(flag)){
+            if(!categoryList.isEmpty()){
+                returnObj = categoryList.size();
+            }else{
+                returnObj = 0;
+            }
+        }else{
+            returnObj = categoryList;
+        }
+
+        return returnObj;
     }
 
 }

@@ -6,7 +6,7 @@
 
 <mapper namespace="com.dhflour.gombooksvr.mapper.maria.MariaTestMapper">
 
-    <select id="getCategoryList" resultType="cMap" parameterType="map">
+    <select id="getCategoryList" resultType="cMap">
         SELECT
         CATE_ID
         , CLASS_L
@@ -18,20 +18,5 @@
         TB_PROD_CATEGORY
         WHERE
         USE_YN = 'Y'
-        <choose>
-            <when test='flag != null and flag.equals("L")'>
-                AND CLASS_S = '000'
-                ORDER BY CLASS_L
-            </when>
-            <when test='flag != null and flag.equals("S")'>
-                AND CLASS_L = #{classL}
-                AND CLASS_S != '000'
-                ORDER BY CLASS_S , DISP_SEQ
-            </when>
-            <otherwise>
-                AND CLASS_S != '000'
-                ORDER BY CLASS_L , DISP_SEQ
-            </otherwise>
-        </choose>
     </select>
 </mapper>
