@@ -20,11 +20,11 @@
 
 📌 **Branch 구조**
 ```bash
-    main
-    ├── bjpark (박범진 과장)
-    ├── sgjang (장성근 사원)
-    └── scpark (박성철 부장)
-
+main
+├── bjpark (박범진 과장)
+├── sgjang (장성근 사원)
+└── scpark (박성철 부장)
+```
 
 📌 ***Branch 운영 방식***
 1. 각 담당자는 자신의 **개인 브랜치**에서 개발을 진행 
