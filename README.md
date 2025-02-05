@@ -1,6 +1,6 @@
 # GomBookSvr (사내문고 시스템 개발)
 
-## Swagger 정보
+## 📌 Swagger 정보
 1. **[Swagger-UI 주소]** (http://localhost:8081/swagger-ui.html)
 2. **[Swagger 문서 주소]** (http://localhost:8081/v3/api-docs)
 
@@ -9,14 +9,27 @@
 
 ---
 
-## Git 정보
-1. **[Git 주소]** (https://github.com/jinsnak/GomBookSvr.git)
-2. **Branch 구성**
-main으로 최종 Source를 관리하고 각각의 담당자별 branch를 통해 개발 및 push 후 Pull Request를 통해 main에 반영한다.  
-main  
-ㄴ  bjpark (박범진 과장)  
-ㄴ  sgjang (장성근 사원)  
-ㄴ  scpark (박성철 부장)  
+## 📌 Git 정보
+
+### 🌐 1. Git 저장소 주소
+- **[Git Repository](https://github.com/jinsnak/GomBookSvr.git)**
+
+
+### 🌿 2. Branch 구성
+**`main`** 브랜치는 최종 소스를 관리하며, 각 담당자별 브랜치를 통해 개발 후 **Pull Request(PR)**를 통해 `main`에 반영함.
+
+📌 **Branch 구조**
+```bash
+    main
+    ├── bjpark (박범진 과장)
+    ├── sgjang (장성근 사원)
+    └── scpark (박성철 부장)
+```
+
+📌 Branch 운영 방식
+1. 각 담당자는 자신의 **개인 브랜치**에서 개발을 진행 
+2. 변경된 내용을 **commit & push** 후, `main` 브랜치로 ***Pull Request(PR)*** 요청 
+3. 코드 리뷰 후 승인되면 `main`에 병합
 
 ---
 
