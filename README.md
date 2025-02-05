@@ -24,9 +24,9 @@
     ├── bjpark (박범진 과장)
     ├── sgjang (장성근 사원)
     └── scpark (박성철 부장)
-```
 
-📌 Branch 운영 방식
+
+📌 ***Branch 운영 방식***
 1. 각 담당자는 자신의 **개인 브랜치**에서 개발을 진행 
 2. 변경된 내용을 **commit & push** 후, `main` 브랜치로 ***Pull Request(PR)*** 요청 
 3. 코드 리뷰 후 승인되면 `main`에 병합
