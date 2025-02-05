@@ -42,7 +42,7 @@ public class TestController {
 //
 //    }
 
-    @Operation(summary = "mariaDB 테스트", description = "카테고리 리스트 불러오기", tags = {"Test Controller"})
+    @Operation(summary = "mariaDB 테스트", description = "카테고리 리스트 불러오기")
     @RequestMapping(value = "/getCategoryList", method = RequestMethod.GET)
     public ResponseEntity<ResultVO> getCategoryList() {
         ResultVO resultVO = new ResultVO();

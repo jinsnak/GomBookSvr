@@ -8,9 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Tag(name = "유저 컨트롤러", description = "유저 관련 호출 관리")
@@ -33,6 +37,24 @@ public class UserController {
         catch (Exception e){
             resultVO.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             resultVO.setBody(e.getMessage());
+        }
+        return new ResponseEntity<>(resultVO, HttpStatus.OK);
+    }
+
+    @Operation(summary = "ERP One User", description = "회사코드와 사번을 이용한 사원 검색")
+    @RequestMapping(value = "/getEmpById/{noEmp}", method = RequestMethod.GET)
+    public ResponseEntity<ResultVO> getEmpById(@PathVariable("noEmp") String noEmp) {
+        ResultVO resultVO = new ResultVO();
+
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("noEmp", noEmp);
+
+        try{
+            resultVO.setCode(HttpStatus.OK.value());
+            resultVO.setBody(us.getEmpById(paramMap));
+        }
+        catch (Exception e){
+            resultVO.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
         return new ResponseEntity<>(resultVO, HttpStatus.OK);
     }
