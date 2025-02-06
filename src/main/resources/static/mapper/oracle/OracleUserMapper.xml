@@ -5,22 +5,57 @@
 
 <!-- SQL Mapping -->
 <mapper namespace="com.dhflour.gombooksvr.mapper.oracle.OracleUserMapper">
-
+    <!-- case1. 전체 조회 Sample, 대한제분 개발서버의 재직자 리스트를 가져온다. -->
     <select id="getEmpList" resultType="map">
         SELECT A.CD_COMPANY AS CD_COMPANY
-        ,A.NO_EMP
-        ,A.NM_KOR
-        ,A.CD_DEPT
-        ,B.NM_DEPT
-        ,A.NO_TEL_EMER
-        ,A.DT_BIRTH
-        FROM MA_EMP A, MA_DEPT B
-        WHERE A.CD_COMPANY = B.CD_COMPANY
-        AND A.CD_DEPT = B.CD_DEPT
-        AND A.CD_COMPANY = '10'
-        AND A.CD_INCOM != '099'
-        ORDER BY A.CD_DEPT
+              ,A.NO_EMP
+              ,A.NM_KOR
+              ,A.CD_DEPT
+              ,B.NM_DEPT
+              ,A.NO_TEL_EMER
+              ,A.DT_BIRTH
+          FROM MA_EMP A, MA_DEPT B
+         WHERE A.CD_COMPANY = B.CD_COMPANY
+           AND A.CD_DEPT = B.CD_DEPT
+           AND A.CD_COMPANY = '10'
+           AND A.CD_INCOM != '099'
+         ORDER BY A.CD_DEPT
     </select>
 
+    <!-- case2. 타겟 조회 Sample, 회사코드와 사번을 받아, 해당되는 인원을 가져온다. -->
+    <select id="getEmpById" resultType="cMap" parameterType="map">
+        SELECT A.CD_COMPANY AS CD_COMPANY
+              ,A.NO_EMP
+              ,A.NM_KOR
+              ,A.CD_DEPT
+              ,B.NM_DEPT
+              ,A.NO_TEL_EMER
+              ,A.DT_BIRTH
+         FROM MA_EMP A, MA_DEPT B
+         WHERE A.CD_COMPANY = B.CD_COMPANY
+           AND A.CD_DEPT = B.CD_DEPT
+           AND A.CD_COMPANY = '10'
+           AND A.NO_EMP = #{noEmp}
+    </select>
 
+    <!-- case3. Update Sample, 사번과 비고를 받아 업데이트한다. -->
+    <update id="updateEmpRmk" parameterType="map">
+        UPDATE MA_USER
+           SET DC_RMK1 = #{rmk}
+         WHERE CD_COMPANY = '10'
+           AND ID_USER = #{noEmp}
+    </update>
+
+    <!-- case4. Insert Sample, Table Raw Insert. -->
+    <insert id="insertEmp" parameterType="map">
+        INSERT INTO MA_USER (ID_USER, CD_COMPANY, NM_USER, PASS_WORD, USR_GBN)
+        VALUES (#{noEmp}, '10', #{nmEmp}, '1', 'INT')
+    </insert>
+
+    <!-- case5. Delete Sample, Table Raw Delete. -->
+    <delete id="deleteEmpById" parameterType="map">
+        DELETE MA_USER
+         WHERE CD_COMPANY = '10'
+           AND ID_USER = #{noEmp}
+    </delete>
 </mapper>
