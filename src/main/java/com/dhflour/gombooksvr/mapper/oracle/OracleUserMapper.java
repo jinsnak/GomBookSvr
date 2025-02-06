@@ -7,8 +7,10 @@ import java.util.Map;
 
 @Mapper
 public interface OracleUserMapper {
-    public List getEmpList();      //전체 조회
-    public Map<String, Object> getEmpById(Map<String, Object> paramMap);    //타겟 조회
-
+    public List getEmpList();      //Select
+    public Map<String, Object> getEmpById(Map<String, Object> paramMap);    //Target Select
+    public int updateEmpRmk(Map<String, Object> paramMap);  //Update
+    public int insertEmp(Map<String, Object> paramMap);     //Insert
+    public int deleteEmpById(Map<String, Object> paramMap);     //Delete
 
 }

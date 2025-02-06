@@ -35,10 +35,14 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.36'                  // 컴파일 시에만 사용, 실제 runtime에는 사용하지 않음.
     annotationProcessor 'org.projectlombok:lombok:1.18.36'          // lombok은 어노테이션 기반으로 동작하는데 이를 처리하기 위해서는 해당 라인을 추가해야 함.
 
+    // Camel Type
     implementation 'com.google.guava:guava:20.0'
 
     //Oracle
     implementation group: 'com.oracle.database.jdbc' , name: 'ojdbc6' , version: '11.2.0.4'
+
+    //spring security
+
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

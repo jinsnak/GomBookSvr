@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @Slf4j
-@Tag(name = "컨트롤러 테스트", description = "DB 커넥션 및 기능 테스트")
+@Tag(name = "MariaDB Controller", description = "maria DB 커넥션 및 기능 테스트")
 @RestController
 @RequestMapping(value = "/api/test")
 public class TestController {
@@ -42,7 +42,7 @@ public class TestController {
 //
 //    }
 
-    @Operation(summary = "mariaDB 테스트", description = "카테고리 리스트 불러오기")
+    @Operation(summary = "OMS 카테고리 전체 조회", description = "전체 조회 Sample")
     @RequestMapping(value = "/getCategoryList", method = RequestMethod.GET)
     public ResponseEntity<ResultVO> getCategoryList() {
         ResultVO resultVO = new ResultVO();

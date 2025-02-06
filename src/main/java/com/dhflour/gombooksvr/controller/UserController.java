@@ -8,16 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@Tag(name = "유저 컨트롤러", description = "유저 관련 호출 관리")
+@Tag(name = "OracleDB Controller", description = "Oracle DB 커넥션 및 기능 테스트")
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserController {
@@ -25,7 +22,7 @@ public class UserController {
     @Autowired
     UserService us;
 
-    @Operation(summary = "ERP All User", description = "ERP 재직중인 모든 사용자 리스트")
+    @Operation(summary = "ERP 유저 전체 조회", description = "전체 조회 Sample")
     @RequestMapping(value = "/getEmpList", method = RequestMethod.GET)
     public ResponseEntity<ResultVO> getEmpList() {
         ResultVO resultVO = new ResultVO();
@@ -41,7 +38,7 @@ public class UserController {
         return new ResponseEntity<>(resultVO, HttpStatus.OK);
     }
 
-    @Operation(summary = "ERP One User", description = "회사코드와 사번을 이용한 사원 검색")
+    @Operation(summary = "ERP 유저 타겟 조회", description = "타겟 조회 Sample")
     @RequestMapping(value = "/getEmpById/{noEmp}", method = RequestMethod.GET)
     public ResponseEntity<ResultVO> getEmpById(@PathVariable("noEmp") String noEmp) {
         ResultVO resultVO = new ResultVO();
@@ -56,6 +53,60 @@ public class UserController {
         catch (Exception e){
             resultVO.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
+        return new ResponseEntity<>(resultVO, HttpStatus.OK);
+    }
+
+    @Operation(summary = "ERP 유저 비고 Update", description = "Update Sample, param: noEmp, rmk")
+    @RequestMapping(value = "/updateEmpRmk", method = RequestMethod.POST)
+    public ResponseEntity<ResultVO> updateEmpRmk(@RequestBody Map<String, Object> paramMap) {
+        ResultVO resultVO = new ResultVO();
+
+        try {
+            Object result = us.updateEmpRmk(paramMap);
+            resultVO.setCode(HttpStatus.OK.value());
+            resultVO.setBody(result);
+        }
+        catch (Exception e){
+            resultVO.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            resultVO.setBody(e.getMessage());
+        }
+
+        return new ResponseEntity<>(resultVO, HttpStatus.OK);
+    }
+
+    @Operation(summary = "ERP 유저 Insert", description = "Insert Sample, param: noEmp, nmEmp")
+    @RequestMapping(value = "/insertEmp", method = RequestMethod.POST)
+    public ResponseEntity<ResultVO> insertEmp(@RequestBody Map<String, Object> paramMap) {
+        ResultVO resultVO = new ResultVO();
+
+        try {
+            Object result = us.insertEmp(paramMap);
+            resultVO.setCode(HttpStatus.OK.value());
+            resultVO.setBody(result);
+        }
+        catch (Exception e){
+            resultVO.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            resultVO.setBody(e.getMessage());
+        }
+
+        return new ResponseEntity<>(resultVO, HttpStatus.OK);
+    }
+
+    @Operation(summary = "ERP 유저 Delete", description = "Delete Sample, param: noEmp")
+    @RequestMapping(value = "/deleteEmp", method = RequestMethod.POST)
+    public ResponseEntity<ResultVO> deleteEmp(@RequestBody Map<String, Object> paramMap) {
+        ResultVO resultVO = new ResultVO();
+
+        try{
+            Object result = us.deleteEmp(paramMap);
+            resultVO.setCode(HttpStatus.OK.value());
+            resultVO.setBody(result);
+        }
+        catch (Exception e){
+            resultVO.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            resultVO.setBody(e.getMessage());
+        }
+
         return new ResponseEntity<>(resultVO, HttpStatus.OK);
     }
 }

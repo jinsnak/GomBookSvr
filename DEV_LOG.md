@@ -109,5 +109,11 @@
 
 1. Swagger Config 아직 이관 안함.
     JWT 또는 Spring 관련 Security에 대한 처리를 하지 않아서 필요가 없는건가..
-2. POST 형 처리 추가 하기
-    POST형 넣어서 뼈대 추가하기
+2. POST 방식 Request body 형식
+   ```bash
+   {
+   "noEmp": "101303001",
+   "rmk": null
+   }
+
+3. 

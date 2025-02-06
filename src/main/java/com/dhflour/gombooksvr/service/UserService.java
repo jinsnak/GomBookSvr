@@ -20,7 +20,7 @@ public class UserService {
         this.oum = oum;
     }
 
-    //전체 조회
+    //Select
     public List<Map<String, Object>> getEmpList(){
         List<Map<String, Object>> empList = oum.getEmpList();
         Object oneObj = empList.get(0);
@@ -28,12 +28,40 @@ public class UserService {
         return empList;
     }
 
-    //타겟 조회
+    //Target Select
     public Map<String, Object> getEmpById(Map<String, Object> paramMap) throws Exception{
         Map<String, Object> returnMap = new HashMap<String, Object>();
         returnMap = oum.getEmpById(paramMap);
 
         return returnMap;
+    }
+
+    //Update
+    public int updateEmpRmk(Map<String, Object> paramMap) throws Exception{
+        int result = 0;
+
+        result = oum.updateEmpRmk(paramMap);
+
+        return result;
+    }
+
+    //Insert
+    public int insertEmp(Map<String, Object> paramMap) throws Exception{
+        int result = 0;
+
+        result = oum.insertEmp(paramMap);
+
+        return result;
+    }
+
+    //Delete
+    public int deleteEmp(Map<String, Object> paramMap) throws Exception{
+        int result = 0;
+
+        result = oum.deleteEmpById(paramMap);
+
+        return result;
+
     }
 
 }
