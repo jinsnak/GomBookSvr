@@ -25,6 +25,7 @@ public class UserService {
         List<Map<String, Object>> empList = oum.getEmpList();
         Object oneObj = empList.get(0);
         System.out.println("FirstMap==" + oneObj.toString());
+
         return empList;
     }
 
@@ -39,7 +40,6 @@ public class UserService {
     //Update
     public int updateEmpRmk(Map<String, Object> paramMap) throws Exception{
         int result = 0;
-
         result = oum.updateEmpRmk(paramMap);
 
         return result;
@@ -48,7 +48,6 @@ public class UserService {
     //Insert
     public int insertEmp(Map<String, Object> paramMap) throws Exception{
         int result = 0;
-
         result = oum.insertEmp(paramMap);
 
         return result;
@@ -57,7 +56,6 @@ public class UserService {
     //Delete
     public int deleteEmp(Map<String, Object> paramMap) throws Exception{
         int result = 0;
-
         result = oum.deleteEmpById(paramMap);
 
         return result;

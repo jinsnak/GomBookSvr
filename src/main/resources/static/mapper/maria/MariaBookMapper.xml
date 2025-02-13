@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- mapper DTD 선언 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- SQL Mapping -->
+
+<mapper namespace="com.dhflour.gombooksvr.mapper.maria.MariaBookMapper">
+
+    <select id="getBookList" resultType="cMap">
+        SELECT CD_COMPANY
+             ,BOOK_NO
+             ,BOOK_DT
+             ,BOOK_NM AS BOOK_NAME
+             ,AUTHOR_NM AS AUTHOR_NAME
+             ,FILENAME_DC
+             ,FILEPATH_DC
+             ,RMK_DC
+        FROM MA_BOOK
+    </select>
+</mapper>
