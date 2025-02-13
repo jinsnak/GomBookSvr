@@ -47,7 +47,7 @@ public class JwtUtil {
             log.info("1년케이스");
             return createToken(info, accessTokenYearExpTime);
             // 보통 User 사용자에게는 1일 토큰 발급
-        } else if ("USR".equals(userType)) {
+        } else if ("EMP".equals(userType)) {
             log.info("DLV1년케이스");
             return createToken(info, accessTokenExpTime);
             // else 구문 처리

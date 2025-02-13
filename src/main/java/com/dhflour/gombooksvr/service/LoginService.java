@@ -40,14 +40,14 @@ public class LoginService {
         paramMap.put("encKey", encKey);
         log.debug("CHECKED=="+paramMap.toString());
 
-        userMap = oum.getLoginInfo(paramMap);
+        userMap = mum.getLoginUserInfoByPw(paramMap);
 
         if(userMap == null || userMap.isEmpty()) {
             //입력한 정보가 일치하지 않는 경우,
             throw new Exception("로그인 정보가 일치하지 않습니다. 아이디와 비밀번호를 확인해주세요.");
         }
         else{
-            //Parameter로 넘어온 flag 값에 따라, Admin과 User 정보를 구분하여 로그인
+            //Parameter로 넘어온 flag 값에 따라, Admin(ADM)과 User(EMP) 정보를 구분하여 로그인
             if(!paramMap.get("flag").equals(cu.getMapString(userMap, "userType"))) {
                 String outStr = UserRoleEnum.findByCode(cu.getMapString(paramMap, "flag"));
                 throw new Exception(outStr + "로그인 정보가 일치하지 않습니다. USER TYPE 오류");

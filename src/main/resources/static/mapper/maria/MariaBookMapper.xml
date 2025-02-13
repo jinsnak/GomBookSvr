@@ -7,7 +7,7 @@
 <mapper namespace="com.dhflour.gombooksvr.mapper.maria.MariaBookMapper">
 
     <select id="getBookList" resultType="cMap">
-        SELECT CD_COMPANY
+        SELECT COMPANY_CD
              ,BOOK_NO
              ,BOOK_DT
              ,BOOK_NM AS BOOK_NAME

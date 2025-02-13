@@ -9,4 +9,5 @@ public interface MariaUserMapper {
     int insertUserToken(Map<String, Object> paramMap);
     int deleteUserTokenById(Map<String, Object> paramMap);
     Map<String, Object> getLoginUserInfoByToken(Map<String, Object> paramMap);
+    Map<String, Object> getLoginUserInfoByPw(Map<String, Object> paramMap);
 }
