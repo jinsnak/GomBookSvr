@@ -18,6 +18,7 @@
          FROM MA_USER
         WHERE USER_ID = #{userId}
           AND PASSWORD = #{password}
+          AND USER_TYPE = #{flag}
     </select>
     <select id="getLoginUserInfoByToken" parameterType="map" resultType="cMap">
         SELECT A.USER_ID
@@ -29,7 +30,7 @@
              ,A.LOGIN_STAY_YN
              ,A.USE_YN
         FROM MA_USER A
-                 LEFT JOIN MA_USER_TOKEN B ON A.USER_ID = B.ID_USER
+                 LEFT JOIN MA_USER_TOKEN B ON A.USER_ID = B.USER_ID
         WHERE A.COMPANY_CD = '10'
           AND A.USER_ID = #{noEmp}
           AND B.TOKEN IS NULL
@@ -54,7 +55,7 @@
         DELETE FROM
             MA_USER_TOKEN
         WHERE
-            ID_USER = #{userId}
+            USER_ID = #{userId}
     </delete>
 
 </mapper>
