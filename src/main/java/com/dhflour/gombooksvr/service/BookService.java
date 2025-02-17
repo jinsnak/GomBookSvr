@@ -1,19 +1,18 @@
 package com.dhflour.gombooksvr.service;
 
-import com.dhflour.gombooksvr.mapper.maria.MariaTestMapper;
+import com.dhflour.gombooksvr.mapper.maria.MariaBookMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class TestService {
-    private final MariaTestMapper mariaTestMapper;
+public class BookService {
+    private final MariaBookMapper mariaBookMapper;
 
-    public TestService(MariaTestMapper mariaTestMapper) {
-        this.mariaTestMapper = mariaTestMapper;
+    public BookService(MariaBookMapper mariaBookMapper) {
+        this.mariaBookMapper = mariaBookMapper;
     }
 
 //    public Map<String, Object> getCategoryList(Map<String, Object> paramMap){
@@ -24,11 +23,11 @@ public class TestService {
 //        return returnMap;
 //    }
 
-    public Object getCategoryList(String flag){
+    public Object getBookList(String flag){
         Object returnObj;
 
         List<Map<String, Object>> categoryList = new ArrayList<Map<String, Object>>();
-        categoryList = mariaTestMapper.getCategoryList();
+        categoryList = mariaBookMapper.getBookList();
 
         if("CNT".equals(flag)){
             if(!categoryList.isEmpty()){

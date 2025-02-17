@@ -5,6 +5,8 @@
 
 <!-- SQL Mapping -->
 <mapper namespace="com.dhflour.gombooksvr.mapper.oracle.OracleUserMapper">
+    
+    <!-- ************************************************ SELECT ************************************************ -->
     <!-- case1. 전체 조회 Sample, 대한제분 개발서버의 재직자 리스트를 가져온다. -->
     <select id="getEmpList" resultType="map">
         SELECT A.CD_COMPANY AS CD_COMPANY
@@ -37,7 +39,28 @@
            AND A.CD_COMPANY = '10'
            AND A.NO_EMP = #{noEmp}
     </select>
+    
+    <!-- case6. 로그인 Sample, 사번과 핸드폰번호를 통해 로그인을 진행한다. -->
+    <select id="getLoginInfo" parameterType="map" resultType="cMap">
+        SELECT A.NO_EMP AS USER_ID
+              ,A.NM_KOR AS USER_NAME
+              ,A.CD_DEPT AS DEPT_CD
+              ,B.NM_DEPT AS DEPT_NAME
+              ,DECODE(A.CD_DEPT, 'A013000', 'ADM', 'USR') AS USER_TYPE
+              ,'N' AS LOGIN_STAY_YN
+              ,'N' AS IS_TMP_PASSWORD
+         FROM MA_EMP A, MA_DEPT B
+        WHERE A.CD_COMPANY = B.CD_COMPANY
+          AND A.CD_DEPT = B.CD_DEPT
+          AND A.CD_COMPANY = '10'
+          AND A.NO_EMP = #{noEmp}
+          AND A.CD_INCOM != '099'
+          AND REPLACE(NO_TEL_EMER, '-') = #{pwd}
+    </select>
 
+
+
+    <!-- ************************************************ UPDATE ************************************************ -->
     <!-- case3. Update Sample, 사번과 비고를 받아 업데이트한다. -->
     <update id="updateEmpRmk" parameterType="map">
         UPDATE MA_USER
@@ -46,16 +69,29 @@
            AND ID_USER = #{noEmp}
     </update>
 
+
+
+    <!-- ************************************************ INSERT ************************************************ -->
     <!-- case4. Insert Sample, Table Raw Insert. -->
     <insert id="insertEmp" parameterType="map">
         INSERT INTO MA_USER (ID_USER, CD_COMPANY, NM_USER, PASS_WORD, USR_GBN)
         VALUES (#{noEmp}, '10', #{nmEmp}, '1', 'INT')
     </insert>
 
+    <!-- case6. 로그인 Sample, JWT토큰 정보 INSERT. -->
+    <insert id="insertUserToken" parameterType="map">
+        INSERT INTO MA_USER_TOKEN
+        VALUES (#{noEmp}, #{token}, TO_CHAR(SYSDATE, 'YYYYMMDD'), SYSDATE);
+    </insert>
+
+
+
+    <!-- ************************************************ DELETE ************************************************ -->
     <!-- case5. Delete Sample, Table Raw Delete. -->
     <delete id="deleteEmpById" parameterType="map">
         DELETE MA_USER
          WHERE CD_COMPANY = '10'
            AND ID_USER = #{noEmp}
     </delete>
+    
 </mapper>

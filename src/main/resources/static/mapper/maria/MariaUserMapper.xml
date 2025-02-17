@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- mapper DTD 선언 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- SQL Mapping -->
+
+<mapper namespace="com.dhflour.gombooksvr.mapper.maria.MariaUserMapper">
+
+    <!-- ************************************************ SELECT ************************************************ -->
+    <select id="getLoginUserInfoByPw" parameterType="map" resultType="cMap">
+        SELECT USER_ID
+              ,USER_NAME
+              ,USER_TYPE
+              ,DEPT_CD
+              ,DEPT_NAME
+              ,IS_TMP_PASSWORD
+              ,LOGIN_STAY_YN
+         FROM MA_USER
+        WHERE USER_ID = #{userId}
+          AND PASSWORD = #{password}
+          AND USER_TYPE = #{flag}
+    </select>
+    <select id="getLoginUserInfoByToken" parameterType="map" resultType="cMap">
+        SELECT A.USER_ID
+             ,A.USER_NAME
+             ,A.DEPT_CD
+             ,A.DEPT_NAME
+             ,A.USER_TYPE
+             ,A.IS_TMP_PASSWORD
+             ,A.LOGIN_STAY_YN
+             ,A.USE_YN
+        FROM MA_USER A
+                 LEFT JOIN MA_USER_TOKEN B ON A.USER_ID = B.USER_ID
+        WHERE A.COMPANY_CD = '10'
+          AND A.USER_ID = #{noEmp}
+          AND B.TOKEN IS NULL
+    </select>
+
+    <!-- ************************************************ UPDATE ************************************************ -->
+
+
+    <!-- ************************************************ INSERT ************************************************ -->
+    <!-- 획득한 JWT Token 정보 insert -->
+    <insert id="insertUserToken" parameterType="map">
+        INSERT INTO
+            MA_USER_TOKEN
+        VALUES
+            (#{userId} , #{token} , TO_CHAR(DATE_ADD(NOW() , INTERVAL 1 YEAR) , 'YYYYMMDD') ,NOW());
+    </insert>
+
+
+    <!-- ************************************************ DELETE ************************************************ -->
+    <!-- JWT Token 정보 delete -->
+    <delete id="deleteUserTokenById" parameterType="map">
+        DELETE FROM
+            MA_USER_TOKEN
+        WHERE
+            USER_ID = #{userId}
+    </delete>
+
+</mapper>

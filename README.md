@@ -69,11 +69,11 @@ main
    ```bash
    git push -u origin bjpark
 
-### 🚀 3-3. 원격 저장소 소스 내려 받기(Master -> My Branch)
+### 🚀 3-3. 원격 저장소 소스 내려 받기(Main -> My Branch)
 
 1. **Main Branch 소스코드 Pull**
    ```bash
-   git pull origin master
+   git pull origin main
 
 ---
 

@@ -4,6 +4,7 @@ import com.dhflour.gombooksvr.beans.ResultVO;
 import com.dhflour.gombooksvr.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +17,11 @@ import java.util.Map;
 @Slf4j
 @Tag(name = "OracleDB Controller", description = "Oracle DB 커넥션 및 기능 테스트")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/api/user")
 public class UserController {
 
-    @Autowired
-    UserService us;
+    private final UserService us;
 
     @Operation(summary = "ERP 유저 전체 조회", description = "전체 조회 Sample")
     @RequestMapping(value = "/getEmpList", method = RequestMethod.GET)
