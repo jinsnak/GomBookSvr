@@ -129,27 +129,41 @@
 ---
 
 ### 99. 개념정리(중간중간 추가)
-1. **@Primary 어노테이션의 쓰임**
+#### 1. **어노테이션의 쓰임**
+1. `@Primary`
 
     Spring에서 동일한 타입의 빈(Bean)이 여러 개 존재할 때,  
     기본으로 선택할 빈을 지정하는 어노테이션
 
-2. **CSRF(Cross-Site Request Forgery) (보안)**
+2. `@RequiredArgsConstructor`
 
-    브라우저는 쿠키를 자동으로 포함하여 요청을 보낸다.  
-    예를 들어, 은행사이트에 로그인한 상태에서 악성 웹사이트에 방문하면,  
-    공격자가 사용자의 계좌에서 돈을 송금하는 요청을 보낼 수 있음.  
-    이를 방지하기 위해 Spring Security 에서는 CSRF 토큰을 사용하여 요청의 신뢰성을 검증함.  
-    **다만, REST API 서버(JWT 토큰 기반 인증 사용)에서는 Off한다.(브라우저가 쿠키를 자동 전송하지 않음)**
+    final 필드를 포함한 **생성자를 자동으로 생성**해주는 Lombok 애노테이션
+    **생성자 주입**을 간소화하며, **불변성**을 보장함.
+    `@Autowired`를 통해 주입이 가능하지만 단점이 많아, `@RequiredArgsConstructor`을 사용한 뒤 final 변수로 선언하여 사용한다.
 
-3. **CORS(Cross-Origin Resource Sharing) (보안)**
+3. `@Component`
 
-    기본적으로 브라우저는 다른 도메인의 API 요청을 차단하는 보안 정책을 가지고 있음.
-    이를 Same-Origin Policy(동일 출처 정책)이라고 함.
-    하지만 웹 애플리케이션이 다른 도메인의 API와도 통신해야 하는 경우가 있을 수 있음.
-    이러한 경우 CORS 정책을 설정함.
-    Ex) `https://mywebsite.com` -> `'https://api.example/com` 요청 시 CORS 설정 필요  
-    허용하면 `api.example.com` -> `'mywebsite.com` 에서도 사용할 수 있음.
+    **Spring 컨테이너에 Bean**으로 등록해 관리할 수 있도록 하는 기본 애노테이션
+    생성자 주입 및 생명주기 고나리가 필요한 경우 사용함
+    대표적으로 `CommonUtil.class`
+
+
+#### 2. **CSRF(Cross-Site Request Forgery) (보안)**
+
+브라우저는 쿠키를 자동으로 포함하여 요청을 보낸다.  
+예를 들어, 은행사이트에 로그인한 상태에서 악성 웹사이트에 방문하면,  
+공격자가 사용자의 계좌에서 돈을 송금하는 요청을 보낼 수 있음.  
+이를 방지하기 위해 Spring Security 에서는 CSRF 토큰을 사용하여 요청의 신뢰성을 검증함.  
+**다만, REST API 서버(JWT 토큰 기반 인증 사용)에서는 Off한다.(브라우저가 쿠키를 자동 전송하지 않음)**
+
+#### 3. **CORS(Cross-Origin Resource Sharing) (보안)**
+
+기본적으로 브라우저는 다른 도메인의 API 요청을 차단하는 보안 정책을 가지고 있음.
+이를 Same-Origin Policy(동일 출처 정책)이라고 함.
+하지만 웹 애플리케이션이 다른 도메인의 API와도 통신해야 하는 경우가 있을 수 있음.
+이러한 경우 CORS 정책을 설정함.
+Ex) `https://mywebsite.com` -> `'https://api.example/com` 요청 시 CORS 설정 필요  
+허용하면 `api.example.com` -> `'mywebsite.com` 에서도 사용할 수 있음.
 
 ### 개발메모
 

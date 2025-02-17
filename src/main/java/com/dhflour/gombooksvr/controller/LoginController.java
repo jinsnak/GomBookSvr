@@ -28,10 +28,18 @@ import java.util.Map;
 public class LoginController {
 
     private final LoginService loginService;
+    private final CommonUtil cu;
 
-    @Autowired
-    CommonUtil cu;;
-
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(
+            examples = {
+                    @ExampleObject(name = "입력값 및 필수여부", value = """
+                            {
+                                "userId": "로그인아이디 - 필수",
+                                "password": "비밀번호 - 필수"
+                            }
+                            """)
+            }
+    ))
     @Operation(summary = "로그인처리", description = "사번과 생일(YYYYMMDD)를 이용하여 JWT Token 발급")
     @RequestMapping(value = "doLogin", method = RequestMethod.POST)
     public ResponseEntity<ResultVO> doLogin(@RequestBody Map<String, Object> paramMap) throws Exception {
