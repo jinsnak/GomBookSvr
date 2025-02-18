@@ -24,7 +24,7 @@ public class UserService {
     public List<Map<String, Object>> getEmpList(){
         List<Map<String, Object>> empList = oum.getEmpList();
         Object oneObj = empList.get(0);
-        System.out.println("FirstMap==" + oneObj.toString());
+//        System.out.println("FirstMap==" + oneObj.toString());
 
         return empList;
     }

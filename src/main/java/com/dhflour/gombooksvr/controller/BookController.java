@@ -21,25 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/book")
 public class BookController {
 
-
     private final BookService bookService;
-
-//    @Operation(summary = "mariaDB 테스트", description = "카테고리 리스트 불러오기", tags = {"Test Controller"})
-//    @RequestMapping(value = "/getCategoryList", method = RequestMethod.GET)
-//    public ResponseEntity<ResultVO> getCategoryList(@RequestParam Map<String, Object> paramMap) {
-//        ResultVO rvo = new ResultVO();
-//
-//        try{
-//            rvo.setCode(HttpStatus.OK.value());
-//            rvo.setBody(testService.getCategoryList(paramMap));
-//        }
-//        catch(Exception e){
-//            rvo.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-//        }
-//
-//        return new ResponseEntity<>(rvo, HttpStatus.OK);
-//
-//    }
 
     @Operation(summary = "책 목록 전체 조회", description = "전체 조회 Sample")
     @RequestMapping(value = "/getBookList", method = RequestMethod.GET)

@@ -1,5 +1,10 @@
 package com.dhflour.gombooksvr.config;
 
+import com.dhflour.gombooksvr.security.CustomAccessDeniedHandler;
+import com.dhflour.gombooksvr.security.CustomAuthenticationEntryPoint;
+import com.dhflour.gombooksvr.security.JwtAuthFilter;
+import com.dhflour.gombooksvr.service.LoginService;
+import com.dhflour.gombooksvr.utils.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +21,13 @@ import java.util.Arrays;
 @AllArgsConstructor
 public class SecurityConfig {
 
+    private final JwtUtil ju;
+    private final LoginService ls;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtUtil jwtUtil) throws Exception {
 
         //CSRF 설정 (Off)
         http.csrf((csrf) -> csrf.disable());
@@ -45,7 +55,13 @@ public class SecurityConfig {
         http.addFilterBefore(cef, UsernamePasswordAuthenticationFilter.class);  //인증필터 적용 이전 UTF-8로 인코딩을 고정
 
         //JWT토큰을 이용하여 인증하기 때문에 UsernamePasswordAuthenticationFilter 필터보다 이전에 토큰을 이용한 인증을 수행한다.
+        http.addFilterBefore(new JwtAuthFilter(ju, ls), UsernamePasswordAuthenticationFilter.class);
 
+        //인증/인가 중 발생하는 예외(Exception)를 처리하기 위한 설정
+        http.exceptionHandling((exceptionHandling) -> exceptionHandling
+                .authenticationEntryPoint(authenticationEntryPoint)     // 인증 실패 시: 로그인하지 않거나 유효한 토큰이 없는 경우 (401)
+                .accessDeniedHandler(accessDeniedHandler)       // 인가 실패 시: 로그인은 했지만 접근 권한이 없는 경우 (403)
+        );
 
         //규칙 생성
         http.authorizeHttpRequests(authorize -> authorize

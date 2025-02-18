@@ -38,7 +38,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
     private final LoginService ls;
 
-    private final CommonUtil cu;
+    //private final CommonUtil cu;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -47,12 +47,22 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String errMessage = "";
         int errStep = 0;
         boolean isNeedAuth = false;
-        boolean isNeedAuthTest = false;     // test
+        boolean isNeedAuthOrigin = false;     // test
         try{
-            isNeedAuth = authUriCheck(reqUri);
-            isNeedAuthTest = authUriCheckByGpt(reqUri);
-            log.info("isNeedAuth" + isNeedAuth);
-            log.info("isNeedAuthTest" + isNeedAuthTest);
+            isNeedAuth = authUriCheckByGpt(reqUri);
+            isNeedAuthOrigin = authUriCheck(reqUri);
+//            System.out.println("isNeedAuth :" + isNeedAuth + ", reqUri :" + reqUri);
+//            System.out.println("isNeedAuthOrigin :" + isNeedAuthOrigin + ", reqUri :" + reqUri);
+
+            // Swagger 페이지에서 실행 시, 인증 없이 통과하기 위한 코드
+            String referer = request.getHeader("Referer");      //요청한 직전 페이지 URL을 가져온다.
+            String uri = request.getRequestURI();
+
+            // Swagger 에서 호출한 거라면, false 로 변경
+            if ((referer != null && referer.contains("/swagger-ui")) || uri.startsWith("/v3/api-docs")) {
+                isNeedAuth = false;
+            }
+//            System.out.println("isNeedAuth :" + isNeedAuth + ", reqUri :" + reqUri);
 
             errStep = 10;
             errMessage = "토큰정보가 없습니다.";
@@ -64,8 +74,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 errMessage = "비정상적인 토큰입니다.";
                 String token = authHeader.substring(7);     // "Bearer "를 제외한 실제 토큰정보만 가져온다.
                 String tokenTest = authHeader.replaceFirst("^Bearer\\s+", "");
-                log.info("tokenTest" + tokenTest);
-                log.info("token" + token);
+//                System.out.println("tokenTest" + tokenTest);
+//                System.out.println("token" + token);
 
 
                 //0. 토큰의 유효성 검증
@@ -78,6 +88,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     paramMap.put("userId", userId);
                     paramMap.put("token", token);
 
+                    CommonUtil cu = new CommonUtil();
                     //CommonUtil 현재일자 가져오기 (나중에 없애자)
 //                    String today = cu.getToday();
 //
@@ -167,10 +178,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 //인증없음 단계로 부여
                 CustomUserDetails cud = new CustomUserDetails(userInfo, UserRoleEnum.ROLE_NOAUTH);
 
+//                System.out.println("Create cud");
                 //default token setting & Pass
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                         new UsernamePasswordAuthenticationToken(cud, null, cud.getAuthorities());
 
+//                System.out.println("create UsernamePasswordAuthenticationToken");
                 //
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 filterChain.doFilter(request, response);
@@ -273,6 +286,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         return !matchBool;
     }
 
+    // 이게 더 뛰어나다.. /api/**인 경우 /api까지도 허용함.
     private boolean authUriCheckByGpt(String requestUri) {
         // 기본값: 인증이 필요함 (true)
         boolean requiresAuth = true;

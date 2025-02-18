@@ -68,4 +68,19 @@ public class LoginController {
 
         return new ResponseEntity<>(rvo, HttpStatus.OK);
     }
+
+//    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(
+//            examples = {
+//                    @ExampleObject(name = "입력값 및 필수여부", value = """
+//                            {
+//                                "userId": "로그인아이디 - 필수",
+//                                "token": "비밀번호 - 필수"
+//                            }
+//                            """)
+//            }
+//    ))
+//    @Operation(summary = "로그인처리", description = "사번과 생일(YYYYMMDD)를 이용하여 JWT Token 발급")
+//    @RequestMapping(value = "doLoginToken", method = RequestMethod.POST)
+//    public ResponseEntity<ResultVO>
+
 }

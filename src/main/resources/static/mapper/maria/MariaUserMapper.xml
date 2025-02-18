@@ -7,6 +7,7 @@
 <mapper namespace="com.dhflour.gombooksvr.mapper.maria.MariaUserMapper">
 
     <!-- ************************************************ SELECT ************************************************ -->
+    <!-- ID와 PASSWORD를 통한 로그인 -->
     <select id="getLoginUserInfoByPw" parameterType="map" resultType="cMap">
         SELECT USER_ID
               ,USER_NAME
@@ -20,6 +21,8 @@
           AND PASSWORD = #{password}
           AND USER_TYPE = #{flag}
     </select>
+
+    <!-- ID와 TOKEN를 통한 로그인 EMP USER만 가능 -->
     <select id="getLoginUserInfoByToken" parameterType="map" resultType="cMap">
         SELECT A.USER_ID
              ,A.USER_NAME
@@ -29,11 +32,12 @@
              ,A.IS_TMP_PASSWORD
              ,A.LOGIN_STAY_YN
              ,A.USE_YN
-        FROM MA_USER A
-                 LEFT JOIN MA_USER_TOKEN B ON A.USER_ID = B.USER_ID
-        WHERE A.COMPANY_CD = '10'
+        FROM MA_USER A, MA_USER_TOKEN B
+        WHERE A.USER_ID = B.USER_ID
+          AND A.COMPANY_CD = '10'
           AND A.USER_ID = #{noEmp}
-          AND B.TOKEN IS NULL
+          AND A.USER_TYPE = 'EMP'
+          AND B.TOKEN = #{token};
     </select>
 
     <!-- ************************************************ UPDATE ************************************************ -->

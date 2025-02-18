@@ -25,6 +25,8 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> returnCol = new ArrayList<SimpleGrantedAuthority>();
+//        System.out.println(ue);
+
         for(String code : ue.getAllCodes()){    //모든 권한 코드 조회
             returnCol.add( new SimpleGrantedAuthority(code));
         }

@@ -45,12 +45,14 @@ public enum UserRoleEnum {
         List<String> returnList = new ArrayList<String>();
 
         UserRoleEnum[] ure = UserRoleEnum.values();
+//        System.out.println("UserRoleEnum Count: " + ure.length);
         for(UserRoleEnum ue : ure){
+//            System.out.println("Role: " + ue.getCode());
             returnList.add( ue.getCode() );
         }
 
-        //return returnList;
-        return null;    // or throw new IllegalArgumentException("역할 코드 없음")
+        return returnList;
+        //return null;    // or throw new IllegalArgumentException("역할 코드 없음")
     }
 
     //모든 Role 명칭 리스트를 반환
